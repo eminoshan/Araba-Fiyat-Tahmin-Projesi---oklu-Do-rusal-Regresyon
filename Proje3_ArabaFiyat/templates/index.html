@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Araba Fiyatı Tahmin Et</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 400px; }
+        h2 { text-align: center; color: #333; }
+        label { margin-top: 10px; display: block; color: #666; font-weight: bold; }
+        input, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background-color: #28a745; color: white; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer; font-size: 16px; font-weight: bold; transition: background 0.3s; }
+        button:hover { background-color: #218838; }
+        .result { margin-top: 20px; padding: 15px; background-color: #e9ecef; border-left: 5px solid #28a745; border-radius: 4px; text-align: center; font-size: 1.2em; color: #333; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🚗 Araba Fiyatı Tahmini</h2>
+    <form action="/predict" method="post">
+        <label>Yıl</label>
+        <input type="number" name="Yil" placeholder="Örn: 2018" required>
+
+        <label>Kilometre</label>
+        <input type="number" name="Kilometre" placeholder="Örn: 120000" required>
+
+        <label>Motor Gücü (HP)</label>
+        <input type="number" name="Motor_Gucu" placeholder="Örn: 110" required>
+
+        <label>Hasar Kaydı (TL)</label>
+        <input type="number" name="Hasar_Kaydi" placeholder="Örn: 5000" value="0">
+
+        <label>Vites Tipi</label>
+        <select name="Vites">
+            <option value="Manuel">Manuel</option>
+            <option value="Otomatik">Otomatik</option>
+        </select>
+
+        <label>Renk</label>
+        <select name="Renk">
+            <option value="Beyaz">Beyaz</option>
+            <option value="Siyah">Siyah</option>
+            <option value="Gri">Gri</option>
+            <option value="Kırmızı">Kırmızı</option>
+        </select>
+
+        <button type="submit">💰 Fiyatı Tahmin Et</button>
+    </form>
+
+    {% if prediction_text %}
+    <div class="result">
+        {{ prediction_text }}
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
